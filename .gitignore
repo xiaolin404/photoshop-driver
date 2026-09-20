@@ -1,0 +1,3 @@
+# scratch files written by `psx selftest`
+scripts/_selftest_tmp.*
+__pycache__/

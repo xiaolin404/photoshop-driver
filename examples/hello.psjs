@@ -1,0 +1,19 @@
+// hello.psjs -- the smallest useful example of the .psjs report round trip.
+//
+// Run:  python scripts/psx.py psjs examples/hello.psjs
+//
+// A .psjs has no return value. It reports through console.log, and psx.py
+// reads the JSON payload framed by these two marker lines out of Photoshop's
+// newest UXP log. Keep the markers on their own lines; log early and
+// unconditionally, so a throw before the report cannot masquerade as
+// "nothing to report".
+const { app } = require("photoshop");
+const uxp = require("uxp");
+
+console.log("UXP_REPORT_BEGIN");
+console.log(JSON.stringify({
+  ok: true,
+  hostVersion: uxp.host && uxp.host.version ? uxp.host.version : "unknown",
+  openDocuments: app.documents.length
+}));
+console.log("UXP_REPORT_END");
